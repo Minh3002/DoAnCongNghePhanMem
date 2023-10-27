@@ -17,6 +17,12 @@ public class DangKy extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	public static void main(String[] args) {
+		new DangKy();
+		
+	}
+	
 	public DangKy() {
 		setLayout(null);
 		

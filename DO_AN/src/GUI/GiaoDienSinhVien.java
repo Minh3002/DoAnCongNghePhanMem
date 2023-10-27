@@ -48,19 +48,21 @@ public class GiaoDienSinhVien {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		MenuSV a = new MenuSV();
+		a.setBounds(-23, 0, 987, 582);
+		frame.getContentPane().add(a);
+		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(204, 0, 255));
+		panel.setBounds(21, 0, 978, 91);
+		a.add(panel);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(10, 0, 944, 91);
-		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Avatar");
 		btnNewButton.setBounds(809, 34, 85, 35);
 		panel.add(btnNewButton);
-		
-		MenuSV a = new MenuSV();
-		a.setBounds(0, 0, 978, 608);
-		frame.getContentPane().add(a);
 
 		
 		
