@@ -19,13 +19,19 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.Cursor;
 
 public class DangNhap {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUsername;
 	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -48,6 +54,7 @@ public class DangNhap {
 	 */
 	public DangNhap() {
 		initialize();
+		
 	}
 
 	/**
@@ -66,27 +73,56 @@ public class DangNhap {
 		panel.setBackground(new Color(105, 105, 105, 120));
 		panel.setBorder(BorderFactory.createSoftBevelBorder(BevelBorder.RAISED));
 		
-		JLabel _title = new JLabel("SIGN IN");
+		JLabel _title = new JLabel("ĐĂNG NHẬP");
 		panel.add(_title);
-		_title.setBounds(172,137,83,30);
+		_title.setBounds(164,136,83,30);
 		
 		JLabel avt = new JLabel("");
 		avt.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\avt.png"));
-		avt.setBounds(120,10,150,150);
+		avt.setBounds(126,10,150,150);
 		panel.add(avt);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(108, 191, 184, 30);
-		panel.add(textField);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(108, 238, 184, 30);
-		panel.add(textField_1);
+		txtUsername = new JTextField();
+		txtUsername.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtUsername.getText().trim().toLowerCase().equals("username"))
+				{
+					txtUsername.setText("");
+					txtUsername.setForeground(Color.black);
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtUsername.getText().trim().equals("") || 
+						txtUsername.getText().trim().toLowerCase().equals("username"))
+				{
+					txtUsername.setText("username");
+					txtUsername.setForeground(new Color(153,153,153));
+				}
+			}
+		});
+		txtUsername.setForeground(Color.LIGHT_GRAY);
+		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtUsername.setText("username");
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(108, 191, 184, 30);
+		panel.add(txtUsername);
 		
 		
 		JButton btnDangNhap = new JButton("ĐĂNG NHẬP");
+		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDangNhap.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnDangNhap.setBackground(Color.WHITE);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnDangNhap.setBackground(new Color(51, 153, 255));
+			}
+		});
 		btnDangNhap.setBackground(new Color(51, 153, 255));
 		btnDangNhap.setBounds(84, 285, 105, 21);
 		panel.add(btnDangNhap);
@@ -96,11 +132,21 @@ public class DangNhap {
 		panel.add(passwordField);
 		
 		JButton btnDangKyTk = new JButton("Bạn chưa có tài khoản?");
+		btnDangKyTk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDangKyTk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnDangKyTk.setBackground(Color.white);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnDangKyTk.setBackground(new Color(219,112,147));
+			}
+		});
 		btnDangKyTk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane optionPane = new JOptionPane("Is this what you need?", JOptionPane.QUESTION_MESSAGE,JOptionPane.YES_NO_OPTION);
-                JDialog dialog = optionPane.createDialog("Dialog");
-                dialog.setVisible(true);
+
+	
 			}
 		});
 		btnDangKyTk.setBackground(new Color(219,112,147));
@@ -108,9 +154,35 @@ public class DangNhap {
 		panel.add(btnDangKyTk);
 		
 		JButton btnKhach = new JButton("KHÁCH");
+		btnKhach.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnKhach.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnKhach.setBackground(Color.white);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnKhach.setBackground(new Color(51, 153, 255));
+			}
+		});
 		btnKhach.setBackground(new Color(51, 153, 255));
 		btnKhach.setBounds(210, 285, 105, 21);
 		panel.add(btnKhach);
+		
+		JLabel icon_user = new JLabel("");
+		icon_user.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\username.png"));
+		icon_user.setBounds(68, 191, 30, 30);
+		panel.add(icon_user);
+		
+		JLabel icon_pass = new JLabel("");
+		icon_pass.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\pass.png"));
+		icon_pass.setBounds(68, 238, 30, 30);
+		panel.add(icon_pass);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setToolTipText("");
+		passwordField_1.setBounds(108, 238, 184, 30);
+		panel.add(passwordField_1);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\wall.png"));
