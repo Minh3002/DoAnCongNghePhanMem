@@ -77,6 +77,11 @@ public class DangKy {
 		panel.setBackground(new Color(105, 105, 105, 120));
 		panel.setBorder(BorderFactory.createSoftBevelBorder(BevelBorder.RAISED));
 		
+		JLabel lblNewLabel_2 = new JLabel("CREATE ACCOUNOUNT");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_2.setBounds(108, 20, 190, 21);
+		panel.add(lblNewLabel_2);
+		
 //		username
 		
 		txtUsername = new JTextField();
@@ -145,6 +150,38 @@ public class DangKy {
 		panel.add(passwordField_1);
 		
 		
+
+		
+//		ma sv, ma gv
+		txtMa = new JTextField();
+		txtMa.setBounds(108, 353, 184, 30);
+		panel.add(txtMa);
+		txtMa.setColumns(10);
+		
+		Border field_Border = BorderFactory.createMatteBorder(1,8, 1, 1, new Color(99, 184, 255));
+		txtUsername.setBorder(field_Border);
+		passwordField_1.setBorder(field_Border);
+		txtEmail.setBorder(field_Border);
+		txtMa.setBorder(field_Border);
+		
+// 		btn student, btn teacher
+		JButton btnStudent = new JButton("");
+		btnStudent.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		btnStudent.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\student.png"));
+		btnStudent.setBounds(108, 267, 70, 70);
+		panel.add(btnStudent);
+		
+		
+		JButton btnTeacher = new JButton("");
+		btnTeacher.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\teacher.png"));
+		btnTeacher.setBounds(222, 267, 70, 70);
+		panel.add(btnTeacher);
+		
 //		dang ki
 		JButton btnDangKy = new JButton("REGISTER");
 		btnDangKy.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -163,21 +200,11 @@ public class DangKy {
 				btnDangKy.setBackground(new Color(99, 184, 255));
 			}
 		});
+		
+		
 		btnDangKy.setBackground(new Color(99, 184, 255));
 		btnDangKy.setBounds(151, 400, 105, 21);
 		panel.add(btnDangKy);
-		
-//		ma sv, ma gv
-		txtMa = new JTextField();
-		txtMa.setBounds(108, 353, 184, 30);
-		panel.add(txtMa);
-		txtMa.setColumns(10);
-		
-		Border field_Border = BorderFactory.createMatteBorder(1,8, 1, 1, new Color(99, 184, 255));
-		txtUsername.setBorder(field_Border);
-		passwordField_1.setBorder(field_Border);
-		txtEmail.setBorder(field_Border);
-		txtMa.setBorder(field_Border);
 		
 		
 		JLabel icon_user = new JLabel("");
@@ -190,10 +217,6 @@ public class DangKy {
 		icon_pass.setBounds(68, 206, 30, 30);
 		panel.add(icon_pass);
 		
-		JLabel lblNewLabel_2 = new JLabel("CREATE ACCOUNOUNT");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(108, 20, 190, 21);
-		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\username.png"));
@@ -205,30 +228,12 @@ public class DangKy {
 		lblNewLabel_4.setBounds(68, 353, 30, 30);
 		panel.add(lblNewLabel_4);
 		
-		JButton btnStudent = new JButton("");
-		btnStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnStudent.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\student.png"));
-		btnStudent.setBounds(108, 267, 70, 70);
-		btnStudent.setBackground(new Color(255, 255, 0));
-		panel.add(btnStudent);
 		
-		JButton btnTeacher = new JButton("");
-		btnTeacher.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\teacher.png"));
-		btnTeacher.setBounds(222, 267, 70, 70);
-		panel.add(btnTeacher);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBackground(new Color(105, 105, 105, 120));
-		btnNewButton.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\icon_back.png"));
-		btnNewButton.setBounds(10, 22, 30, 30);
-		panel.add(btnNewButton);
+		JButton btnBack = new JButton("");
+		btnBack.setBackground(new Color(105, 105, 105, 120));
+		btnBack.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\icon_back.png"));
+		btnBack.setBounds(10, 22, 30, 30);
+		panel.add(btnBack);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\wall.png"));
