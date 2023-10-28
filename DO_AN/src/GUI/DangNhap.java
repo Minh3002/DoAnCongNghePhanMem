@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -21,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -110,6 +113,11 @@ public class DangNhap {
 		txtUsername.setBounds(108, 191, 184, 30);
 		panel.add(txtUsername);
 		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setToolTipText("");
+		passwordField_1.setBounds(108, 238, 184, 30);
+		panel.add(passwordField_1);
+		
 		
 		JButton btnDangNhap = new JButton("ĐĂNG NHẬP");
 		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -120,12 +128,15 @@ public class DangNhap {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnDangNhap.setBackground(new Color(51, 153, 255));
+				btnDangNhap.setBackground(new Color(99, 184, 255));
 			}
 		});
-		btnDangNhap.setBackground(new Color(51, 153, 255));
+		btnDangNhap.setBackground(new Color(99, 184, 255));
 		btnDangNhap.setBounds(84, 285, 105, 21);
 		panel.add(btnDangNhap);
+		
+		
+		
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(108, 191, 184, 19);
@@ -140,7 +151,7 @@ public class DangNhap {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnDangKyTk.setBackground(new Color(219,112,147));
+				btnDangKyTk.setBackground(new Color(238, 106, 167));
 			}
 		});
 		btnDangKyTk.addActionListener(new ActionListener() {
@@ -149,7 +160,7 @@ public class DangNhap {
 	
 			}
 		});
-		btnDangKyTk.setBackground(new Color(219,112,147));
+		btnDangKyTk.setBackground(new Color(238, 106, 167));
 		btnDangKyTk.setBounds(108, 316, 184, 21);
 		panel.add(btnDangKyTk);
 		
@@ -162,12 +173,17 @@ public class DangNhap {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnKhach.setBackground(new Color(51, 153, 255));
+				btnKhach.setBackground(new Color(99, 184, 255));
 			}
 		});
-		btnKhach.setBackground(new Color(51, 153, 255));
+		btnKhach.setBackground(new Color(99, 184, 255));
 		btnKhach.setBounds(210, 285, 105, 21);
 		panel.add(btnKhach);
+		
+		Border field_Border = BorderFactory.createMatteBorder(1,8, 1, 1, new Color(99, 184, 255));
+		txtUsername.setBorder(field_Border);
+		passwordField_1.setBorder(field_Border);
+		
 		
 		JLabel icon_user = new JLabel("");
 		icon_user.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\username.png"));
@@ -179,10 +195,7 @@ public class DangNhap {
 		icon_pass.setBounds(68, 238, 30, 30);
 		panel.add(icon_pass);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setToolTipText("");
-		passwordField_1.setBounds(108, 238, 184, 30);
-		panel.add(passwordField_1);
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\wall.png"));

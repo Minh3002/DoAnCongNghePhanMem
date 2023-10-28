@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import DTO.NguoiDung;
@@ -13,7 +14,7 @@ public class NguoiDungDAO {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String dbUrl = "jdbc:sqlserver://localhost:1433;DatabaseName=qltn;encrypt=false";
             String username = "sa";
-            String password= "123456";
+            String password= "1234567";
             con = DriverManager.getConnection(dbUrl, username, password);
             return true;
         }
@@ -63,7 +64,66 @@ public class NguoiDungDAO {
         }
         return arr;
     }
-
+ //Phan Hoàng Minh---------------------------
+    public NguoiDung getUser(String ID){
+        NguoiDung nd = new NguoiDung();
+        if (openConnection()) {
+            try {
+                String sql = "Select * from NGUOIDUNG where IdUsser = '" + ID +"'";
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                if(rs.next()){
+                    nd.setMaUser(rs.getString("IdUsser"));
+                    nd.setHoTen(rs.getString("HoTen"));
+                    nd.setEmail(rs.getString("Gmail"));
+                    nd.setNgayTao(rs.getDate("NgayTao"));
+                    nd.setMaGV(rs.getString("MaGiaoVien"));
+                    nd.setMaHS(rs.getString("MaHocSinh"));
+                    nd.setUserName(rs.getString("TaiKhoan"));
+                    nd.setMatKhau(rs.getString("MatKhau"));
+                    nd.setQuyen(rs.getString("TenPhanQuyen"));
+                    
+                }
+            }
+            catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            finally {
+                closeConnection();
+            }
+        }
+        return nd;
+    }
+    
+    public Vector<NguoiDung> getAllUserOfGroup(String MaNhom){
+        Vector<NguoiDung> arr = new Vector<NguoiDung>();
+        if (openConnection()) {
+            try {
+                String sql = "Select * from NGUOIDUNG,THANHVIENNHOM where IdUsser=SinhVien and Active=1 and Nhom='" + MaNhom + "'";
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                while(rs.next()){
+                    NguoiDung nd = new NguoiDung();
+                    nd.setMaUser(rs.getString("IdUsser"));
+                    nd.setHoTen(rs.getString("HoTen"));
+                    nd.setEmail(rs.getString("Gmail"));
+                    nd.setNgayTao(rs.getDate("NgayTao"));
+                    nd.setMaGV(rs.getString("MaGiaoVien"));
+                    nd.setMaHS(rs.getString("MaHocSinh"));
+                    arr.add(nd);
+                    
+                }
+            }
+            catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            finally {
+                closeConnection();
+            }
+        }
+        return arr;
+    }
+    //---------------------------------------
     public Vector<String> getQuyen(){
         Vector<String> quyen = new Vector<>();
         quyen.add("Tất Cả");
@@ -286,6 +346,39 @@ public class NguoiDungDAO {
             }
         }
         return date;
+    }
+    //-------------------Test không kết nối SQL-------------------
+    public NguoiDung getNguoiĐungangNhap(String userName, String Password)
+    {
+    	NguoiDung nguoiDung = new NguoiDung();
+		nguoiDung.setUserName(userName);
+		nguoiDung.setMatKhau(Password);
+		nguoiDung.setNgayTao(new Date(600000000));
+    	if(userName.equals("sinhvienmanhdeptraiqua1706") && Password.equals("1234567"))
+    	{
+    		nguoiDung.setHoTen("Mảnh Đẹp Trai học sinh");
+    		nguoiDung.setEmail("manhdeptrai1706@gmail.com");
+    		nguoiDung.setMaHS("HS1");
+    		nguoiDung.setMaUser("US1");
+    		nguoiDung.setQuyen("Học sinh");
+    	}
+    	else if(userName.equals("giaovienmanhdeptrai1706") && Password.equals("1234567"))
+    	{
+    		nguoiDung.setHoTen("Mảnh Đẹp Trai Giáo viên");
+    		nguoiDung.setEmail("manhdeptrai1706@gmail.com");
+    		nguoiDung.setMaHS("HS1");
+    		nguoiDung.setMaUser("US2");
+    		nguoiDung.setQuyen("Giáo viên");
+    	}
+    	else if(userName.equals("adminmanhdeptrai1706") && Password.equals("1234567"))
+    	{
+    		nguoiDung.setHoTen("Mảnh Đẹp Trai Admin");
+    		nguoiDung.setEmail("manhdeptrai1706@gmail.com");
+    		nguoiDung.setMaUser("US3");
+    		nguoiDung.setQuyen("Admin");
+    	}
+    	else return null;
+    	return nguoiDung;
     }
 
 }
