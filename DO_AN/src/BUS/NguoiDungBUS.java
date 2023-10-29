@@ -14,7 +14,7 @@ public class NguoiDungBUS {
 		NguoiDungDAO ndDAO = new NguoiDungDAO();
 		return ndDAO.getAllUserOfGroup(ID);
 	}
-	public NguoiDung getNguoiĐungangNhap(String userName, String Password)
+	public NguoiDung getNguoiDungDangNhap(String userName, String Password)
 	{
 		NguoiDungDAO ndDAO = new NguoiDungDAO();
 		return ndDAO.getNguoiĐungangNhap(userName, Password);

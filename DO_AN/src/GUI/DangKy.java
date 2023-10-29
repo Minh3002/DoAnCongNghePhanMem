@@ -12,6 +12,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import BUS.NguoiDungBUS;
 
 import java.awt.Color;
 import javax.swing.JTextArea;
@@ -28,12 +29,13 @@ import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.Cursor;
+import javax.swing.JRadioButton;
 
 public class DangKy {
 
 	private JFrame frame;
-	private JTextField txtUsername;
-	private JPasswordField passwordField_1;
+	private JTextField userName;
+	private JPasswordField Password;
 	private JTextField txtEmail;
 	private JTextField txtMa;
 
@@ -84,33 +86,33 @@ public class DangKy {
 		
 //		username
 		
-		txtUsername = new JTextField();
-		txtUsername.addFocusListener(new FocusAdapter() {
+		userName = new JTextField();
+		userName.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent ev) {
-				if(txtUsername.getText().trim().toLowerCase().equals("username"))
+				if(userName.getText().trim().toLowerCase().equals("username"))
 				{
-					txtUsername.setText("");
-					txtUsername.setForeground(Color.black);
+					userName.setText("");
+					userName.setForeground(Color.black);
 				}
 			}
 			
 			@Override
 			public void focusLost(FocusEvent ev) {
-				if(txtUsername.getText().trim().equals("") || 
-						txtUsername.getText().trim().toLowerCase().equals("username"))
+				if(userName.getText().trim().equals("") || 
+						userName.getText().trim().toLowerCase().equals("username"))
 				{
-					txtUsername.setText("username");
-					txtUsername.setForeground(new Color(153,153,153));
+					userName.setText("username");
+					userName.setForeground(new Color(153,153,153));
 				}
 			}
 		});
-		txtUsername.setForeground(Color.LIGHT_GRAY);
-		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtUsername.setText("username");
-		txtUsername.setColumns(10);
-		txtUsername.setBounds(108, 70, 184, 30);
-		panel.add(txtUsername);
+		userName.setForeground(Color.LIGHT_GRAY);
+		userName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		userName.setText("username");
+		userName.setColumns(10);
+		userName.setBounds(108, 108, 184, 30);
+		panel.add(userName);
 		
 		
 //		email
@@ -139,17 +141,25 @@ public class DangKy {
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtEmail.setText("email");
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(108, 137, 184, 30);
+		txtEmail.setBounds(108, 180, 184, 30);
 		panel.add(txtEmail);
 		
 
 //		password
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setToolTipText("");
-		passwordField_1.setBounds(108, 206, 184, 30);
-		panel.add(passwordField_1);
+		Password = new JPasswordField();
+		Password.setToolTipText("");
+		Password.setBounds(108, 247, 184, 30);
+		panel.add(Password);
 		
+		JRadioButton rdoStudent = new JRadioButton("STUDENT");
+		rdoStudent.setBackground(new Color(238, 106, 167));
+		rdoStudent.setBounds(85, 302, 105, 21);
+		panel.add(rdoStudent);
 		
+		JRadioButton rdoTeacher = new JRadioButton("TEACHER");
+		rdoTeacher.setBackground(new Color(238, 106, 167));
+		rdoTeacher.setBounds(207, 302, 105, 21);
+		panel.add(rdoTeacher);
 
 		
 //		ma sv, ma gv
@@ -159,28 +169,11 @@ public class DangKy {
 		txtMa.setColumns(10);
 		
 		Border field_Border = BorderFactory.createMatteBorder(1,8, 1, 1, new Color(99, 184, 255));
-		txtUsername.setBorder(field_Border);
-		passwordField_1.setBorder(field_Border);
+		userName.setBorder(field_Border);
+		Password.setBorder(field_Border);
 		txtEmail.setBorder(field_Border);
 		txtMa.setBorder(field_Border);
-		
-// 		btn student, btn teacher
-		JButton btnStudent = new JButton("");
-		btnStudent.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
-		btnStudent.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\student.png"));
-		btnStudent.setBounds(108, 267, 70, 70);
-		panel.add(btnStudent);
-		
-		
-		JButton btnTeacher = new JButton("");
-		btnTeacher.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\teacher.png"));
-		btnTeacher.setBounds(222, 267, 70, 70);
-		panel.add(btnTeacher);
+
 		
 //		dang ki
 		JButton btnDangKy = new JButton("REGISTER");
@@ -209,18 +202,18 @@ public class DangKy {
 		
 		JLabel icon_user = new JLabel("");
 		icon_user.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\username.png"));
-		icon_user.setBounds(68, 70, 30, 30);
+		icon_user.setBounds(68, 108, 30, 30);
 		panel.add(icon_user);
 		
 		JLabel icon_pass = new JLabel("");
 		icon_pass.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\pass.png"));
-		icon_pass.setBounds(68, 206, 30, 30);
+		icon_pass.setBounds(68, 247, 30, 30);
 		panel.add(icon_pass);
 		
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\username.png"));
-		lblNewLabel_3.setBounds(68, 137, 30, 30);
+		lblNewLabel_3.setBounds(68, 180, 30, 30);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
@@ -230,10 +223,12 @@ public class DangKy {
 		
 		
 		JButton btnBack = new JButton("");
-		btnBack.setBackground(new Color(105, 105, 105, 120));
+		btnBack.setBackground(new Color(99, 184, 255));
 		btnBack.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\icon_back.png"));
 		btnBack.setBounds(10, 22, 30, 30);
 		panel.add(btnBack);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("D:\\DoAnCongNghePhanMem\\DO_AN\\img\\wall.png"));

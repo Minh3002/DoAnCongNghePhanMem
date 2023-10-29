@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.EventQueue;
+
 import java.awt.Menu;
 
 import javax.swing.JFrame;

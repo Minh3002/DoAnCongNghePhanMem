@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.EventQueue;
 
+import GUI.DangKy;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
 import javax.swing.BorderFactory;
@@ -143,6 +146,16 @@ public class DangNhap {
 		panel.add(passwordField);
 		
 		JButton btnDangKyTk = new JButton("Bạn chưa có tài khoản?");
+//		btnDangKyTk.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+////				DangKy dk = new DangKy();
+////				dk.setBounds(0, 0, 1000, 600);
+////				DangKy.frame.getContentPane().add(dk);
+////				DangKy.frame.revalidate();
+////				DangKy.frame.repaint();
+////				DangKy.frame.getContentPane().remove(DangNhap.this);
+////				}
+//		});
 		btnDangKyTk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDangKyTk.addMouseListener(new MouseAdapter() {
 			@Override
@@ -154,12 +167,8 @@ public class DangNhap {
 				btnDangKyTk.setBackground(new Color(238, 106, 167));
 			}
 		});
-		btnDangKyTk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		
 
-	
-			}
-		});
 		btnDangKyTk.setBackground(new Color(238, 106, 167));
 		btnDangKyTk.setBounds(108, 316, 184, 21);
 		panel.add(btnDangKyTk);

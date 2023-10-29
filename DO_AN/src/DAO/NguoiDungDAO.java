@@ -348,7 +348,7 @@ public class NguoiDungDAO {
         return date;
     }
     //-------------------Test không kết nối SQL-------------------
-    public NguoiDung getNguoiĐungangNhap(String userName, String Password)
+    public NguoiDung getNguoiDungDangNhap(String userName, String Password)
     {
     	NguoiDung nguoiDung = new NguoiDung();
 		nguoiDung.setUserName(userName);
