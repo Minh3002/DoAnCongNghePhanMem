@@ -19,6 +19,7 @@ public class NguoiDungBUS {
 		NguoiDungDAO ndDAO = new NguoiDungDAO();
 		return ndDAO.getNguoiĐungangNhap(userName, Password);
 	}
+	
 	NguoiDungDAO nd = new NguoiDungDAO();
 
     public Vector<NguoiDung> getAllUser(){
