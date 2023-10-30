@@ -1,6 +1,9 @@
 package GUI;
 
 import DTO.TKDiemDTO;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import BUS.SinhVienBUS;
 
 import java.awt.Color;
@@ -27,6 +30,7 @@ public class ThongKe extends JPanel {
 	private JButton btn_back;
 	private JButton btn_home;
 	private String id;
+	private ChartPanel chartPanel;
 
 	private SinhVienBUS sv = new SinhVienBUS();
 
@@ -55,7 +59,7 @@ public class ThongKe extends JPanel {
 		JLabel txt_qesR = new JLabel("Số câu đúng");
 		txt_qesR.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		quesR.add(txt_qesR);
-		JLabel num_qesR = new JLabel(String.valueOf(sv.QuesR()));
+		JLabel num_qesR = new JLabel(String.valueOf(sv.QuesR(arr)));
 		num_qesR.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		quesR.add(num_qesR);
 		quesR.addMouseListener(new MouseAdapter() {
@@ -75,7 +79,7 @@ public class ThongKe extends JPanel {
 		JLabel txt_qesW = new JLabel("Số câu sai");
 		txt_qesW.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		quesW.add(txt_qesW);
-		JLabel num_qesW = new JLabel(String.valueOf(sv.QuesW()));
+		JLabel num_qesW = new JLabel(String.valueOf(sv.QuesW(arr)));
 		num_qesW.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		quesW.add(num_qesW);
 		quesW.addMouseListener(new MouseAdapter() {
@@ -95,7 +99,7 @@ public class ThongKe extends JPanel {
 		JLabel txt_qesP = new JLabel("Số câu bỏ qua");
 		txt_qesP.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		quesP.add(txt_qesP);
-		JLabel num_qesP = new JLabel(String.valueOf(sv.QuesP()));
+		JLabel num_qesP = new JLabel(String.valueOf(sv.QuesP(arr)));
 		num_qesP.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		quesP.add(num_qesP);
 		quesP.addMouseListener(new MouseAdapter() {
@@ -107,6 +111,41 @@ public class ThongKe extends JPanel {
 			}
 		});
 		add(quesP);
+
+		UtilDateModel model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		datePicker.setBounds(760, 90, 170, 26);
+		JLabel txt_fr = new JLabel("Từ ngày:");
+		txt_fr.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txt_fr.setBounds(760,57,70,40);
+		add(txt_fr);
+		add(datePicker);
+
+		UtilDateModel modelt = new UtilDateModel();
+		JDatePanelImpl datePanelt = new JDatePanelImpl(modelt);
+		JDatePickerImpl datePickert = new JDatePickerImpl(datePanelt);
+		datePickert.setBounds(760, 140, 170, 26);
+		JLabel txt_to = new JLabel("Đến:");
+		txt_to.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txt_to.setBounds(760,107,120,40);
+		add(txt_to);
+		add(datePickert);
+
+		JButton btn_view = new JButton(new ImageIcon("img/icon_view.png"));
+		btn_view.setBounds(905, 170, 25, 25);
+		btn_view.setBackground(new Color(234,230,235));
+		btn_view.setBorderPainted(false);
+
+		btn_view.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e){
+				btn_view.setBackground(new Color(215,207,218));
+			}
+			public void mouseExited(MouseEvent e){
+				btn_view.setBackground(new Color(234,230,235));
+			}
+		});
+		add(btn_view);
 
 		JPanel grade = new JPanel(ly);
 		grade.setBounds(760, 220, 170, 80);
@@ -135,7 +174,7 @@ public class ThongKe extends JPanel {
 		JLabel txt_numed = new JLabel("Số bài đã làm");
 		txt_numed.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		numed.add(txt_numed);
-		JLabel num_numed = new JLabel(String.valueOf(sv.SoBai()));
+		JLabel num_numed = new JLabel(String.valueOf(sv.SoBai(arr)));
 		num_numed.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		numed.add(num_numed);
 		numed.addMouseListener(new MouseAdapter() {
@@ -155,7 +194,7 @@ public class ThongKe extends JPanel {
 		JLabel txt_times = new JLabel("Thời gian trung bình");
 		txt_times.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		times.add(txt_times);
-		JLabel num_times = new JLabel("0");
+		JLabel num_times = new JLabel(String.valueOf(sv.avgTime()));
 		num_times.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		times.add(num_times);
 		times.addMouseListener(new MouseAdapter() {
@@ -181,9 +220,8 @@ public class ThongKe extends JPanel {
 
 		btn_back.addActionListener(new ActionListener(){
 			@Override
-			public void actionPerformed(ActionEvent e){
-				q.setText("afwffw");
-
+			public void actionPerformed(ActionEvent e){			
+				
 			}
 		});
 		btn_back.addMouseListener(new MouseAdapter() {
@@ -220,7 +258,8 @@ public class ThongKe extends JPanel {
 		pMBar.add(btn_home);
 
 		chart = ChartFactory.createBarChart("", "", "",chartData(),PlotOrientation.VERTICAL, false, false, false);
-		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel = new ChartPanel(chart);
+
 
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();	
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
@@ -230,12 +269,50 @@ public class ThongKe extends JPanel {
 		chartPanel.setPreferredSize(new java.awt.Dimension(600,370));
 		chartPanel.setBounds(25, 163, 700, 370);
 
+
 		CategoryPlot categoryplot = chart.getCategoryPlot();
 		BarRenderer bar = new BarRenderer();
 		bar.setSeriesPaint(0,new Color(150,15,191,150));
 		categoryplot.setRenderer(bar);
 		
 		add(chartPanel); 
+
+		btn_view.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				String dateFr = "";
+				String dateTo = "";
+				Vector<TKDiemDTO> tkd = new Vector<>();
+				if (datePicker.getModel().getValue()==null && datePickert.getModel().getValue()!=null){
+					dateTo = String.valueOf(datePickert.getModel().getYear()) + "-" + String.valueOf((datePickert.getModel().getMonth())+1) + "-" + String.valueOf(datePickert.getModel().getDay());
+				}
+				else if (datePicker.getModel().getValue()!=null && datePickert.getModel().getValue()==null){
+					dateFr = String.valueOf(datePicker.getModel().getYear()) + "-" + String.valueOf((datePicker.getModel().getMonth())+1) + "-" + String.valueOf(datePicker.getModel().getDay());
+				}
+				else if(datePicker.getModel().getValue()==null && datePickert.getModel().getValue()==null){
+					dateFr = "";
+					dateTo = "";
+				}
+				else if(datePicker.getModel().getValue()!=null && datePickert.getModel().getValue()!=null){
+					dateTo = String.valueOf(datePickert.getModel().getYear()) + "-" + String.valueOf((datePickert.getModel().getMonth())+1) + "-" + String.valueOf(datePickert.getModel().getDay());
+					dateFr = String.valueOf(datePicker.getModel().getYear()) + "-" + String.valueOf((datePicker.getModel().getMonth())+1) + "-" + String.valueOf(datePicker.getModel().getDay());
+				}
+				tkd = sv.tkDiemFT(dateFr, dateTo);
+				DefaultCategoryDataset data = new DefaultCategoryDataset();	
+				for (TKDiemDTO x : tkd) {
+					data.addValue(x.getDtb(),"Điểm",x.getChuyenDe());
+				}
+				plot.setDataset(data);
+				num_qesR.setText(String.valueOf(sv.QuesR(tkd)));
+				num_qesW.setText(String.valueOf(sv.QuesW(tkd)));
+				num_qesP.setText(String.valueOf(sv.QuesP(tkd)));
+				num_numed.setText(String.valueOf(sv.SoBai(tkd)));
+				num_grade.setText(String.format("%.2f",sv.DTBFT(dateFr,dateTo)));
+				num_times.setText(sv.avgTimeFT(dateFr,dateTo));
+
+			}
+		});
+
 		setBackground(Color.WHITE);
 		setLayout(null);
 	}
@@ -247,19 +324,19 @@ public class ThongKe extends JPanel {
 		}
 		return data;
 	}
-	
+
+	/*
 	public static void main(String[] args){
 		
 		JFrame f = new JFrame("Thống kê");
 
-		f.getContentPane().add(new ThongKe("US001"));
-        f.setSize(1000,600);
+		f.getContentPane().add(new ThongKe("US1"));
+        	f.setSize(1000,600);
 		f.setLocationRelativeTo(null);
-        f.setResizable(false);
+        	f.setResizable(false);
 		f.setVisible(true);
 		f.setBackground(Color.WHITE);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-
+	*/
 }
